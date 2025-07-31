@@ -1,12 +1,13 @@
 {
   "name": "be",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "tsc -b && node dist/index.js",
-    "build": "tsc -b",
+    "dev": "tsc && node dist/index.js",
+    "build": "tsc",
     "start": "node dist/index.js",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "vercel-build": "tsc"
   },
   "keywords": [],
   "author": "",

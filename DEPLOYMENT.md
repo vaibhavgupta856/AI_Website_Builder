@@ -1,4 +1,63 @@
-# AI Website Builder - Deployment Guide
+# 🚀 AI Website Builder - Deployment Guide
+
+## ⚠️ VERCEL DEPLOYMENT STUCK? READ THIS FIRST! ⚠️
+
+If your Vercel deployment is stuck at "Deploying" and not moving forward, follow these steps:
+
+### Immediate Fix Steps:
+
+1. **Cancel the stuck deployment:**
+   - Go to your Vercel dashboard
+   - Click on your project
+   - In the "Deployments" tab, find the stuck deployment
+   - Click the three dots (...) and select "Cancel"
+
+2. **Check your project settings:**
+   - Root Directory: Must be set to `frontend` for frontend deployment
+   - Framework Preset: Select **Vite** (not Other)
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Install Command: `npm install`
+
+3. **Deploy the correct way:**
+   - Deploy frontend and backend as **separate projects**
+   - Don't try to deploy the entire monorepo at once
+
+## Quick Deployment Steps
+
+### Option 1: Vercel (Recommended - Fixed Configuration)
+
+#### 1. Deploy Frontend to Vercel
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click "New Project"
+3. Import your `AI_Website_Builder` repository
+4. **⚠️ CRITICAL:** Set root directory to `frontend`
+5. Framework Preset: **Vite** (not Other)
+6. Build Command: `npm run build` (should auto-detect)
+7. Output Directory: `dist` (should auto-detect)
+8. Install Command: `npm install` (should auto-detect)
+9. Click "Deploy"
+
+#### 2. Deploy Backend to Vercel
+1. Create a **new project** on Vercel (separate from frontend)
+2. Import the same `AI_Website_Builder` repository
+3. **⚠️ CRITICAL:** Set root directory to `be`
+4. Framework Preset: **Other**
+5. Build Command: `npm run build`
+6. Output Directory: Leave empty (or `dist`)
+7. Install Command: `npm install`
+8. **Add Environment Variable:**
+   - Key: `GEMINI_API_KEY`
+   - Value: `AIzaSyDctW3TqbqIuJsNXHToRVS8CSgU2sj46Gw`
+9. Click "Deploy"
+
+#### 3. Update Frontend Environment
+1. Go to your frontend project settings on Vercel
+2. Navigate to "Settings" → "Environment Variables"
+3. Add Environment Variable:
+   - Key: `VITE_BACKEND_URL`
+   - Value: `https://your-backend-url.vercel.app` (copy from step 2)
+4. Go to "Deployments" and click "Redeploy" on the latest deployment
 
 This guide covers deploying both the frontend and backend of your AI Website Builder to various platforms.
 

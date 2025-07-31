@@ -1,6 +1,6 @@
-# Bolt.js Clone - Deployment Guide
+# AI Website Builder - Deployment Guide
 
-This guide covers deploying both the frontend and backend of your Bolt.js clone to various platforms.
+This guide covers deploying both the frontend and backend of your AI Website Builder to various platforms.
 
 ## Project Structure
 ```

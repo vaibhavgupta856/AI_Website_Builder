@@ -21,7 +21,7 @@ call vercel --prod
 echo.
 echo 📝 Step 3: Setting environment variable...
 echo ⚠️  You'll need to add your Gemini API key
-echo    Your API key: AIzaSyCLz5CayaSpMGwvnD4ROpB1rD6776grMI4
+echo    Your API key: AIzaSyDctW3TqbqIuJsNXHToRVS8CSgU2sj46Gw
 pause
 call vercel env add GEMINI_API_KEY
 call vercel --prod

@@ -28,7 +28,7 @@ call vercel --prod
 echo.
 echo 🔑 STEP 3: Add API Key to Backend
 call vercel env add GEMINI_API_KEY production
-echo Enter your API key: AIzaSyCLz5CayaSpMGwvnD4ROpB1rD6776grMI4
+echo Enter your API key: AIzaSyDctW3TqbqIuJsNXHToRVS8CSgU2sj46Gw
 
 echo.
 echo 🔄 STEP 4: Redeploy Backend with API Key

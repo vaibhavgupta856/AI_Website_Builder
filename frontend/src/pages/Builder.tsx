@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { StepsList } from '../components/StepsList';
 import { FileExplorer } from '../components/FileExplorer';
 import { TabView } from '../components/TabView';
@@ -11,6 +11,8 @@ import { BACKEND_URL } from '../config';
 import { parseXml } from '../steps';
 import { useWebContainer } from '../hooks/useWebContainer';
 import { Loader } from '../components/Loader';
+import { ArrowLeft, Send, Sparkles, Code, Eye, Zap, Download } from 'lucide-react';
+import JSZip from 'jszip';
 
 type MountStructure = {
   [key: string]: {
@@ -215,79 +217,231 @@ export function Builder() {
     }
   }, [prompt]);
 
+  // Function to download all files as ZIP
+  const downloadProject = useCallback(async () => {
+    if (files.length === 0) {
+      alert('No files to download yet. Please generate some code first!');
+      return;
+    }
+
+    try {
+      const zip = new JSZip();
+      
+      // Add all files to the ZIP
+      files.forEach(file => {
+        if (file.type === 'file' && file.content) {
+          // Remove leading slash from path for cleaner ZIP structure
+          const cleanPath = file.path.startsWith('/') ? file.path.slice(1) : file.path;
+          zip.file(cleanPath, file.content);
+        }
+      });
+
+      // Generate ZIP file
+      const content = await zip.generateAsync({ type: 'blob' });
+      
+      // Create download link
+      const url = window.URL.createObjectURL(content);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `ai-website-project-${Date.now()}.zip`;
+      
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Clean up
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error creating ZIP file:', error);
+      alert('Failed to create ZIP file. Please try again.');
+    }
+  }, [files]);
+
   useEffect(() => {
     init();
   }, [init])
 
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <header className="bg-gray-800 border-b border-gray-700 px-6 py-4">
-        <h1 className="text-xl font-semibold text-gray-100">Website Builder</h1>
-        <p className="text-sm text-gray-400 mt-1">Prompt: {prompt}</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-slate-900 to-black"></div>
+      <div className="absolute inset-0">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute bg-blue-500/10 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 20 + 10}px`,
+              height: `${Math.random() * 20 + 10}px`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${Math.random() * 3 + 4}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Header */}
+      <header className="relative z-10 glass border-b border-white/10 px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center space-x-2 text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+            >
+              <ArrowLeft size={20} />
+              <span>Back</span>
+            </button>
+            <div className="h-6 w-px bg-white/20"></div>
+            <div className="flex items-center space-x-2">
+              <Sparkles className="text-purple-400" size={24} />
+              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                AI Website Builder
+              </h1>
+            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 text-sm text-white/60">
+              <Zap size={16} className="text-yellow-400" />
+              <span>Building with AI</span>
+            </div>
+            <button
+              onClick={downloadProject}
+              className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-200 btn-glow text-sm"
+              disabled={files.length === 0}
+            >
+              <Download size={16} />
+              <span>Download ZIP</span>
+            </button>
+          </div>
+        </div>
+        <div className="mt-2">
+          <p className="text-sm text-white/60 bg-black/20 px-3 py-1 rounded-full inline-flex items-center">
+            <Sparkles size={14} className="mr-2 text-purple-400" />
+            Prompt: {prompt}
+          </p>
+        </div>
       </header>
       
-      <div className="flex-1 overflow-hidden">
-        <div className="h-full grid grid-cols-4 gap-6 p-6">
-          <div className="col-span-1 space-y-6 overflow-auto">
-            <div>
-              <div className="max-h-[75vh] overflow-scroll">
+      <div className="relative z-10 flex-1 overflow-hidden">
+        <div className="h-full grid grid-cols-12 gap-6 p-6">
+          {/* Steps & Input Section */}
+          <div className="col-span-3 space-y-4">
+            <div className="glass rounded-xl p-4 h-[calc(100vh-12rem)] flex flex-col">
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500">
+                  <Code size={16} className="text-white" />
+                </div>
+                <h2 className="font-semibold text-white">Build Steps</h2>
+              </div>
+              
+              <div className="flex-1 overflow-auto mb-4 custom-scrollbar">
                 <StepsList
                   steps={steps}
                   currentStep={currentStep}
                   onStepClick={setCurrentStep}
                 />
               </div>
-              <div>
-                <div className='flex'>
-                  <br />
-                  {(loading || !templateSet) && <Loader />}
-                  {!(loading || !templateSet) && <div className='flex'>
-                    <textarea value={userPrompt} onChange={(e) => {
-                    setPrompt(e.target.value)
-                  }} className='p-2 w-full'></textarea>
-                  <button onClick={async () => {
-                    const newMessage = {
-                      role: "user" as const,
-                      content: userPrompt
-                    };
 
-                    setLoading(true);
-                    const stepsResponse = await axios.post(`${BACKEND_URL}/chat`, {
-                      messages: [...llmMessages, newMessage]
-                    });
-                    setLoading(false);
+              {/* Chat Input */}
+              <div className="border-t border-white/10 pt-4">
+                {(loading || !templateSet) ? (
+                  <div className="flex items-center justify-center py-8">
+                    <Loader />
+                    <span className="ml-3 text-white/60">Generating your website...</span>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium text-white/80">Refine your website:</label>
+                    <div className="flex space-x-2">
+                      <textarea
+                        value={userPrompt}
+                        onChange={(e) => setPrompt(e.target.value)}
+                        placeholder="Ask for changes or improvements..."
+                        className="flex-1 px-3 py-2 bg-black/20 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 resize-none"
+                        rows={3}
+                      />
+                      <button
+                        onClick={async () => {
+                          const newMessage = {
+                            role: "user" as const,
+                            content: userPrompt
+                          };
 
-                    setLlmMessages(x => [...x, newMessage]);
-                    setLlmMessages(x => [...x, {
-                      role: "assistant",
-                      content: stepsResponse.data.response
-                    }]);
-                    
-                    setSteps(s => [...s, ...parseXml(stepsResponse.data.response).map(x => ({
-                      ...x,
-                      status: "pending" as const
-                    }))]);
+                          setLoading(true);
+                          const stepsResponse = await axios.post(`${BACKEND_URL}/chat`, {
+                            messages: [...llmMessages, newMessage]
+                          });
+                          setLoading(false);
 
-                  }} className='bg-purple-400 px-4'>Send</button>
-                  </div>}
-                </div>
+                          setLlmMessages(x => [...x, newMessage]);
+                          setLlmMessages(x => [...x, {
+                            role: "assistant",
+                            content: stepsResponse.data.response
+                          }]);
+                          
+                          setSteps(s => [...s, ...parseXml(stepsResponse.data.response).map(x => ({
+                            ...x,
+                            status: "pending" as const
+                          }))]);
+                          
+                          setPrompt("");
+                        }}
+                        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-200 flex items-center space-x-2 btn-glow"
+                      >
+                        <Send size={16} />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-          <div className="col-span-1">
-              <FileExplorer 
-                files={files} 
-                onFileSelect={setSelectedFile}
-              />
+
+          {/* File Explorer */}
+          <div className="col-span-3">
+            <div className="glass rounded-xl p-4 h-[calc(100vh-12rem)]">
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-green-500 to-teal-500">
+                  <Code size={16} className="text-white" />
+                </div>
+                <h2 className="font-semibold text-white">Project Files</h2>
+              </div>
+              <div className="h-[calc(100%-3rem)] overflow-auto">
+                <FileExplorer 
+                  files={files} 
+                  onFileSelect={setSelectedFile}
+                />
+              </div>
             </div>
-          <div className="col-span-2 bg-gray-900 rounded-lg shadow-lg p-4 h-[calc(100vh-8rem)]">
-            <TabView activeTab={activeTab} onTabChange={setActiveTab} />
-            <div className="h-[calc(100%-4rem)]">
-              {activeTab === 'code' ? (
-                <CodeEditor file={selectedFile} />
-              ) : (
-                <PreviewFrame webContainer={webcontainer} files={files} />
-              )}
+          </div>
+
+          {/* Code Editor & Preview */}
+          <div className="col-span-6">
+            <div className="glass rounded-xl p-4 h-[calc(100vh-12rem)] flex flex-col">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-2">
+                  <div className="p-2 rounded-lg bg-gradient-to-r from-orange-500 to-red-500">
+                    {activeTab === 'code' ? <Code size={16} className="text-white" /> : <Eye size={16} className="text-white" />}
+                  </div>
+                  <h2 className="font-semibold text-white">
+                    {activeTab === 'code' ? 'Code Editor' : 'Live Preview'}
+                  </h2>
+                </div>
+                <TabView activeTab={activeTab} onTabChange={setActiveTab} />
+              </div>
+              
+              <div className="flex-1 rounded-lg overflow-hidden bg-black/20 border border-white/10">
+                {activeTab === 'code' ? (
+                  <CodeEditor file={selectedFile} />
+                ) : (
+                  <PreviewFrame webContainer={webcontainer} files={files} />
+                )}
+              </div>
             </div>
           </div>
         </div>

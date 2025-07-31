@@ -2,7 +2,7 @@
 
 ## ✅ Repository Setup Complete!
 
-Your Bolt.js Clone is now ready for deployment at:
+Your AI Website Builder is now ready for deployment at:
 **https://github.com/vaibhavgupta856/AI_Website_Builder**
 
 ## 🎯 Next Steps (Choose One):
@@ -10,12 +10,12 @@ Your Bolt.js Clone is now ready for deployment at:
 ### Option 1: One-Click Vercel Deployment (EASIEST)
 
 1. **Deploy Backend (2 minutes):**
-   - Click: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=bolt-backend&root-directory=be&env=GEMINI_API_KEY&envDescription=Google%20Gemini%20API%20Key)
-   - Enter API Key: `AIzaSyCLz5CayaSpMGwvnD4ROpB1rD6776grMI4`
+   - Click: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=ai-backend&root-directory=be&env=GEMINI_API_KEY&envDescription=Google%20Gemini%20API%20Key)
+   - Enter API Key: `AIzaSyDctW3TqbqIuJsNXHToRVS8CSgU2sj46Gw`
    - Copy the deployed URL
 
 2. **Deploy Frontend (1 minute):**
-   - Click: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=bolt-frontend&root-directory=frontend&env=VITE_BACKEND_URL&envDescription=Backend%20API%20URL)
+   - Click: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=ai-frontend&root-directory=frontend&env=VITE_BACKEND_URL&envDescription=Backend%20API%20URL)
    - Enter Backend URL from step 1
    - Deploy!
 
@@ -33,7 +33,7 @@ Your Bolt.js Clone is now ready for deployment at:
 - Root Directory: `be`
 - Build Command: `npm run build`
 - Start Command: `npm start`
-- Environment: `GEMINI_API_KEY=AIzaSyCLz5CayaSpMGwvnD4ROpB1rD6776grMI4`
+- Environment: `GEMINI_API_KEY=AIzaSyDctW3TqbqIuJsNXHToRVS8CSgU2sj46Gw`
 
 **Frontend Settings:**
 - Root Directory: `frontend`  
@@ -49,7 +49,7 @@ Your Bolt.js Clone is now ready for deployment at:
 
 ## 🎉 After Deployment
 
-Your Bolt Clone will be live at:
+Your AI Website Builder will be live at:
 - **Backend API:** `https://your-backend-url`
 - **Frontend App:** `https://your-frontend-url`
 

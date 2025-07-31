@@ -32,7 +32,7 @@ Follow these exact steps to deploy your Bolt Clone for FREE on Vercel:
    ```
    
    **When prompted:**
-   - `What's the value of GEMINI_API_KEY?` → **AIzaSyCLz5CayaSpMGwvnD4ROpB1rD6776grMI4**
+   - `What's the value of GEMINI_API_KEY?` → **AIzaSyDctW3TqbqIuJsNXHToRVS8CSgU2sj46Gw**
    - `Add to which environments?` → **Production** (press Space, then Enter)
 
 5. **Redeploy with environment variable:**

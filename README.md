@@ -1,20 +1,20 @@
-# Bolt.js Clone 
+# AI Website Builder 🚀
 
-A full-stack AI-powered code generation tool similar to Bolt.js, built with React, TypeScript, Express, and Google's Gemini AI.
+A full-stack AI-powered code generation tool that creates complete websites from simple text descriptions, built with React, TypeScript, Express, and Google's Gemini AI.
 
 ## 🚀 Quick Deploy (FREE)
 
 ### Deploy to Vercel (Recommended)
 
 **Backend:**
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=bolt-backend&root-directory=be&env=GEMINI_API_KEY&envDescription=Google%20Gemini%20API%20Key&envLink=https%3A%2F%2Faistudio.google.com)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=ai-backend&root-directory=be&env=GEMINI_API_KEY&envDescription=Google%20Gemini%20API%20Key&envLink=https%3A%2F%2Faistudio.google.com)
 
 **Frontend:**
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=bolt-frontend&root-directory=frontend&env=VITE_BACKEND_URL&envDescription=Backend%20API%20URL&envLink=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder&project-name=ai-frontend&root-directory=frontend&env=VITE_BACKEND_URL&envDescription=Backend%20API%20URL&envLink=https%3A%2F%2Fgithub.com%2Fvaibhavgupta856%2FAI_Website_Builder)
 
 ### Deploy to Railway + Netlify
 
-**Backend:** [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/bolt-backend?referralCode=bolt)
+**Backend:** [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/ai-backend?referralCode=ai-builder)
 
 **Frontend:** [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/vaibhavgupta856/AI_Website_Builder)
 
@@ -52,8 +52,8 @@ A full-stack AI-powered code generation tool similar to Bolt.js, built with Reac
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd bolt-clone
+   git clone https://github.com/vaibhavgupta856/AI_Website_Builder.git
+   cd AI_Website_Builder
    ```
 
 2. **Install dependencies**
@@ -193,7 +193,7 @@ MIT License - see LICENSE file for details
 
 ## Acknowledgments
 
-- Built with inspiration from Bolt.js
+- Built with modern web technologies and AI
 - Uses Google's Gemini AI for code generation
 - WebContainer API for in-browser execution
 - React ecosystem for the frontend

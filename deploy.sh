@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Quick deployment script for Bolt Clone
-echo "🚀 Starting Bolt Clone deployment preparation..."
+# Quick deployment script for AI Website Builder
+echo "🚀 Starting AI Website Builder deployment preparation..."
 
 # Check if we're in the right directory
 if [ ! -f "package.json" ]; then

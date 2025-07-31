@@ -1,7 +1,7 @@
 {
-  "name": "bolt-clone",
+  "name": "ai-website-builder",
   "version": "1.0.0",
-  "description": "A Bolt.js clone with React frontend and Express backend",
+  "description": "AI-powered website builder with React frontend and Express backend",
   "scripts": {
     "install:backend": "cd be && npm install",
     "install:frontend": "cd frontend && npm install",
@@ -15,7 +15,7 @@
     "dev:frontend": "cd frontend && npm run dev",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
   },
-  "keywords": ["bolt", "ai", "code-generation", "react", "express", "gemini"],
+  "keywords": ["ai", "website-builder", "code-generation", "react", "express", "gemini"],
   "author": "",
   "license": "MIT",
   "devDependencies": {

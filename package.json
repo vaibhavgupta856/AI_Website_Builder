@@ -1,0 +1,24 @@
+{
+  "name": "bolt-clone",
+  "version": "1.0.0",
+  "description": "A Bolt.js clone with React frontend and Express backend",
+  "scripts": {
+    "install:backend": "cd be && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "build:backend": "cd be && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "build:all": "npm run build:backend && npm run build:frontend",
+    "start:backend": "cd be && npm start",
+    "start:frontend": "cd frontend && npm run preview",
+    "dev:backend": "cd be && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "keywords": ["bolt", "ai", "code-generation", "react", "express", "gemini"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

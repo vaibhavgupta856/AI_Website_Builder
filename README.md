@@ -171,10 +171,6 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive deployment instructions cov
 4. Test thoroughly
 5. Submit a pull request
 
-## License
-
-MIT License - see LICENSE file for details
-
 ## Troubleshooting
 
 ### Common Issues
